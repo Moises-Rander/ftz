@@ -1,0 +1,9 @@
+{{ instituicao_nome }}
+========================================
+
+{% block conteudo %}{% endblock %}
+
+----------------------------------------
+{{ instituicao_nome }}
+Contato: {{ contato_email }} | {{ contato_telefone }}
+Este é um email automático, por favor não responda.
