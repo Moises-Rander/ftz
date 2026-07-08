@@ -40,12 +40,19 @@ Confirme que `.env`, `db.sqlite3`, `venv/`, `media/`, `staticfiles/`, `frontend/
 - Recomendado: mover o DNS para o **Cloudflare** (grátis) — facilita subdomínios e CDN.
   No Cloudflare: *Add site* → siga a troca de nameservers no registro.br.
 
-## Passo 2 — Storage de mídia (Cloudflare R2)
-1. Cloudflare → **R2** → *Create bucket* → nome `ftz-media`.
-2. **R2 → Manage API Tokens** → crie um token com permissão *Object Read & Write* → anote `Access Key ID` e `Secret Access Key`.
-3. Endpoint do R2: `https://<ACCOUNT_ID>.r2.cloudflarestorage.com`.
-4. (Opcional) Domínio público do bucket para imagens: R2 → *Settings → Public access → Connect domain* → `cdn.ftzait.com.br`.
-   - Guarde: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_STORAGE_BUCKET_NAME=ftz-media`, `AWS_S3_ENDPOINT_URL=...`, `AWS_S3_CUSTOM_DOMAIN=cdn.ftzait.com.br`.
+## Passo 2 — Storage de mídia (Cloudflare R2) — DOIS buckets
+Documentos sensíveis (RG/CPF/histórico) e imagens públicas **não podem** ficar no
+mesmo bucket, porque publicar um bucket (custom domain / public URL) torna TODO
+o conteúdo público. Por isso usamos dois buckets:
+
+1. Cloudflare → **Storage & databases → R2** → *Create bucket*:
+   - `ftz-media` → **imagens públicas**.
+   - `ftz-docs`  → **documentos privados** (NÃO habilite acesso público neste!).
+2. Tornar público **apenas** o `ftz-media`:
+   - `ftz-media → Settings → Custom Domains → Add` → `cdn.ftzait.com.br` (requer o domínio no Cloudflare), **ou** `Public Development URL → Enable` (dá uma URL `pub-xxxx.r2.dev` para começar/testar).
+   - O domínio/URL público resultante vira `AWS_S3_CUSTOM_DOMAIN`.
+3. Credenciais: **R2 → Overview → `{ } API` → Manage API Tokens → Create** com permissão *Object Read & Write* (aplicada aos dois buckets). Anote `Access Key ID`, `Secret Access Key` e o **Endpoint S3** (`https://<ACCOUNT_ID>.r2.cloudflarestorage.com`).
+   - Variáveis: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_STORAGE_BUCKET_NAME=ftz-media`, `AWS_PRIVATE_BUCKET_NAME=ftz-docs`, `AWS_S3_ENDPOINT_URL=...`, `AWS_S3_CUSTOM_DOMAIN=cdn.ftzait.com.br` (ou a URL `pub-xxxx.r2.dev`).
 
 ## Passo 3 — Email (Resend)
 1. [resend.com](https://resend.com) → *Add Domain* `ftzait.com.br` → adicione os registros **SPF/DKIM** no DNS (Cloudflare). Sem isso os emails caem no spam.

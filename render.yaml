@@ -72,11 +72,13 @@ services:
       - key: AWS_SECRET_ACCESS_KEY
         sync: false
       - key: AWS_STORAGE_BUCKET_NAME
-        sync: false
+        value: "ftz-media"       # bucket PÚBLICO (imagens)
+      - key: AWS_PRIVATE_BUCKET_NAME
+        value: "ftz-docs"        # bucket PRIVADO (documentos sensíveis)
       - key: AWS_S3_ENDPOINT_URL
         sync: false
       - key: AWS_S3_CUSTOM_DOMAIN
-        sync: false
+        sync: false              # domínio público do bucket de imagens
       # --- Observabilidade (opcional) ---
       - key: SENTRY_DSN
         sync: false
