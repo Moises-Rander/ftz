@@ -204,6 +204,14 @@ CSRF_TRUSTED_ORIGINS = [
     o for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if o
 ]
 
+# O Render injeta o host público do serviço (ex.: ftz-api.onrender.com).
+# Libera-o automaticamente para funcionar também na URL temporária, sem precisar
+# esperar o domínio próprio ficar ativo.
+_render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if _render_host:
+    ALLOWED_HOSTS.append(_render_host)
+    CSRF_TRUSTED_ORIGINS.append(f'https://{_render_host}')
+
 # Django REST Framework — autenticação por JWT, exige login por padrão,
 # com rate limiting (anti brute-force) nos endpoints sensíveis.
 REST_FRAMEWORK = {
