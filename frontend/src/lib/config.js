@@ -6,9 +6,9 @@ const env = import.meta.env
 export const API_URL = env.VITE_API_URL || 'http://localhost:8000/api'
 
 export const CONTATO = {
-  email: env.VITE_CONTATO_EMAIL || 'contato@ftz.edu.br',
-  telefone: env.VITE_CONTATO_TELEFONE || '(11) 4000-0000',
-  whatsapp: env.VITE_CONTATO_WHATSAPP || '5511940000000',
+  email: env.VITE_CONTATO_EMAIL || 'zenaldooliveira67@gmail.com',
+  telefone: env.VITE_CONTATO_TELEFONE || '(98) 98833-9224',
+  whatsapp: env.VITE_CONTATO_WHATSAPP || '5598988339224',
   instagram: env.VITE_CONTATO_INSTAGRAM || 'https://instagram.com/ftz',
   endereco:
     env.VITE_CONTATO_ENDERECO ||

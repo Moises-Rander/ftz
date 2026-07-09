@@ -258,15 +258,15 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = env_bool('EMAIL_USE_TLS', 'True')
 DEFAULT_FROM_EMAIL = os.environ.get(
-    'DEFAULT_FROM_EMAIL', 'Faculdade de Teologia Zait <noreply@ftz.edu.br>'
+    'DEFAULT_FROM_EMAIL', 'Faculdade de Teologia Zait <zenaldooliveira67@gmail.com>'
 )
 # Endereço do Admin que recebe notificações internas (nunca outros usuários).
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'secretaria@ftz.edu.br')
 
 # Dados institucionais exibidos nos templates de email
 INSTITUICAO_NOME = os.environ.get('FTZ_NOME', 'Faculdade de Teologia Zait')
-INSTITUICAO_CONTATO_EMAIL = os.environ.get('FTZ_CONTATO_EMAIL', 'contato@ftz.edu.br')
-INSTITUICAO_CONTATO_TELEFONE = os.environ.get('FTZ_CONTATO_TELEFONE', '(11) 4000-0000')
+INSTITUICAO_CONTATO_EMAIL = os.environ.get('FTZ_CONTATO_EMAIL', 'zenaldooliveira67@gmail.com')
+INSTITUICAO_CONTATO_TELEFONE = os.environ.get('FTZ_CONTATO_TELEFONE', '(98) 98833-9224')
 INSTITUICAO_LOGO_URL = os.environ.get('FTZ_LOGO_URL', '')
 
 # Integração Asaas (gateway de pagamento)
