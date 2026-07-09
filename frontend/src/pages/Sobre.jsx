@@ -6,14 +6,18 @@ import { useConteudo, useEquipe } from '@/hooks/useCms'
 import { INSTITUICAO } from '@/lib/config'
 
 const container = 'mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'
-const SECOES = ['MISSAO', 'VISAO', 'VALORES']
 
 function Blocos() {
   const { data, isLoading, isError, refetch } = useConteudo()
   if (isLoading) return <Spinner />
   if (isError) return <ErrorState onRetry={refetch} />
 
-  const blocos = (data || []).filter((b) => SECOES.includes(b.secao))
+  // Exibe todos os blocos institucionais (Sobre, Missão, Visão, Valores),
+  // exceto o HERO (que é o banner da Home), na ordem definida pelo campo "ordem"
+  // (empate resolvido pela ordem de cadastro).
+  const blocos = (data || [])
+    .filter((b) => b.secao !== 'HERO')
+    .sort((a, b) => a.ordem - b.ordem || a.id - b.id)
   if (blocos.length === 0)
     return <EmptyState message="Conteúdo institucional em atualização." />
 
